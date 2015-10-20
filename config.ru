@@ -1,7 +1,9 @@
 require 'bundler'
+require './http-logger'
 Bundler.require
 
 $stdout.sync = true
 
 use Rack::HTTPLogger
-run lambda { [404, {'Content-Type' => 'text/html'}, ['Page Not Found']] }
+run lambda { |env| [200, {'Content-Type'=>'text/plain'}, StringIO.new("Hello World!\n")] }
+
